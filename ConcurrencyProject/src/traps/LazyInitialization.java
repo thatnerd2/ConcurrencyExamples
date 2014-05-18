@@ -1,5 +1,5 @@
 package traps;
 
 public class LazyInitialization {
-waw
+//NEED TO FINISH THIS
 }
