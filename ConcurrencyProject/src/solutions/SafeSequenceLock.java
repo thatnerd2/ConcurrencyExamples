@@ -1,9 +1,9 @@
 package solutions;
 
-public class SafeSequence {
+public class SafeSequenceLock {
 	private int integer;
 	
-	public SafeSequence () {
+	public SafeSequenceLock () {
 		integer = 5;
 	}
 	
