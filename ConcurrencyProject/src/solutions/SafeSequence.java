@@ -1,4 +1,4 @@
-package traps;
+package solutions;
 
 public class SafeSequence {
 	private int integer;

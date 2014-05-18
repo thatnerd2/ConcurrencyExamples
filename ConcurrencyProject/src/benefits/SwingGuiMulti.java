@@ -1,4 +1,4 @@
-package standalone;
+package benefits;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
