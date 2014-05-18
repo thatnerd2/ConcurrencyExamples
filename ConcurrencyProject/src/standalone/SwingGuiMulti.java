@@ -1,5 +1,8 @@
 package standalone;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -11,28 +14,86 @@ public class SwingGuiMulti {
 	public static void main (String[] args) {
 		setupFrame();
 		setupButtons();
-		renderButtons();
 	}
 	
 	private static void setupFrame () {
 		frame = new JFrame("Swing GUI Example");
-		frame.setSize(400, 400);
+		frame.setSize(400, 600);
 		frame.setLayout(null);
 		frame.setVisible(true);
 	}
 	
 	public static void setupButtons () {
-		JButton actionButton = new JButton ("Click to count to 5000");
+		JButton longButton = new JButton ("Multithreaded loop");
+		JButton shortButton = new JButton ("Singly threadedt loop");
 		JButton responseButton = new JButton ("Click to get an alert");
-		JButton[] buttonGroup = {actionButton, responseButton};
+		JButton newLineButton = new JButton ("Click to print a line");
+		JButton[] buttonGroup = {longButton, shortButton, responseButton, newLineButton};
 		for (int i = 0; i < buttonGroup.length; i++) {
 			buttonGroup[i].setSize(200, 100);
-			buttonGroup[i].setLocation(100 * i*50, 200);
+			buttonGroup[i].setLocation(100, i * 100);
 			frame.add(buttonGroup[i]);
 		}
-		
+		longButton.addActionListener (new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				Thread t = factory.new LoopingThread(1, 140, "LONG LOOP");
+				t.start();
+			}
+		});
+		shortButton.addActionListener (new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				//Thread t = factory.new LoopingThread(1, 120, "SHORT LOOP");
+				//t.start();
+				for (int i = 1; i <= 120; i++) {
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException exception) {
+						// TODO Auto-generated catch block
+						exception.printStackTrace();
+					}
+				}
+			}
+		});
+		responseButton.addActionListener (new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				System.out.println("RESPONSE");
+			}
+		});
+		newLineButton.addActionListener (new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				System.out.println("----------------------------");
+			}
+		});
 		
 	}
 	
+	
+	class LoopingThread extends Thread {
+		int start;
+		int end;
+		String msg;
+		
+		public LoopingThread (int s, int e, String m) {
+			start = s;
+			end = e;
+			msg = m;
+		}
+		
+		public void run () {
+			System.out.println(msg);
+			
+			for (int i = start; i <= end; i++) {
+				try {
+					sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			System.out.println(msg+" DONE");
+			this.interrupt();
+		}
+	}
 	
 }
