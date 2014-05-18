@@ -12,6 +12,7 @@ public class UnpredictableOrder {
 		j.start();		
 	}
 	
+	//Multiple problems: race condition, unreliability of who gets there first.
 	public static int getNext () {
 		return integer++;
 	}
