@@ -25,7 +25,7 @@ public class SwingGuiMulti {
 	
 	public static void setupButtons () {
 		JButton longButton = new JButton ("Multithreaded loop");
-		JButton shortButton = new JButton ("Singly threadedt loop");
+		JButton shortButton = new JButton ("Singly threaded loop");
 		JButton responseButton = new JButton ("Click to get an alert");
 		JButton newLineButton = new JButton ("Click to print a line");
 		JButton[] buttonGroup = {longButton, shortButton, responseButton, newLineButton};
@@ -44,6 +44,7 @@ public class SwingGuiMulti {
 			public void actionPerformed (ActionEvent e) {
 				//Thread t = factory.new LoopingThread(1, 120, "SHORT LOOP");
 				//t.start();
+				System.out.println("SHORT LOOP");
 				for (int i = 1; i <= 120; i++) {
 					try {
 						Thread.sleep(10);
@@ -52,6 +53,7 @@ public class SwingGuiMulti {
 						exception.printStackTrace();
 					}
 				}
+				System.out.println("SHORT LOOP DONE");
 			}
 		});
 		responseButton.addActionListener (new ActionListener () {
