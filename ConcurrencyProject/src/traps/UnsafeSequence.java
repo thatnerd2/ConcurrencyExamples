@@ -8,7 +8,7 @@ public class UnsafeSequence {
 	}
 	
 	//Read modify write race condition!
-	public synchronized int getNext () {
+	public int getNext () {
 		return integer++;
 	}
 }
